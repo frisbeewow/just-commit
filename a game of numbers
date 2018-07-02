@@ -1,0 +1,47 @@
+//https://www.hackerearth.com/practice/data-structures/stacks/basics-of-stacks/practice-problems/algorithm/a-game-of-numbers-1-5d3a8cb3/
+//a game of numbers
+ #include<bits/stdc++.h>
+using namespace std;
+void nextgreater(int a[],int n,int next[],char c)
+{
+	stack<int>s;
+	for(int i=n-1;i>=0;i--)
+	{
+	
+	while(s.empty()==false && (c=='G'?a[s.top()]<=a[i]:a[s.top()]>=a[i]))
+	{
+		s.pop();
+	}
+	if(!s.empty())
+	next[i]=s.top();
+	else
+	next[i]=-1;
+	s.push(i);	
+}
+}
+void nextsmallertonextgreater(int a[],int n)
+{
+	int NG[n];
+	int RS[n];
+	nextgreater(a,n,NG,'G');
+	nextgreater(a,n,RS,'S');
+	for(int i=0;i<n;i++)
+	{
+		if(NG[i]!=-1&&RS[NG[i]]!=-1)
+		cout<<a[RS[NG[i]]]<<" ";
+		else
+		cout<<-1<<" ";
+	}
+		
+}
+int main()
+{
+	
+	int t;
+	cin>>t;
+	int a[t];
+	for(int i=0;i<t;i++)
+	cin>>a[i];
+	int n=t;
+	nextsmallertonextgreater(a,n);
+}
